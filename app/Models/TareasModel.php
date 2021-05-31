@@ -1,7 +1,20 @@
 <?php namespace App\Models;
 use CodeIgniter\Model;
 class TareasModel extends Model{ 
-
+    function ActualizarTarea($id,$avance){
+      $db=db_connect();
+      $mostrar=$db->query(
+      "update GT_Tareas set nAvance='$avance',
+      cIdUsuMod='BRAYAM', dFecMod = GETDATE() where nCodTar='$id';
+    ");
+      return $mostrar->getResult();
+    }
+    function ActualizarAvanceSemaforo($id){
+      $db=db_connect();
+      $mostrar=$db->query(
+      "EXEC GT_Maneja_Estado_Avance_Semaforo $id
+    ");
+    }
     function get_tareasFiltros($fechaI,$fechaF,$textbus,$tipoTarea,$estado,$prioridad,$validada){
       if($textbus !=''){
         $textbus=" AND TA.cTarea LIKE '%$textbus%'";

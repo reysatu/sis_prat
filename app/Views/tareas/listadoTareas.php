@@ -111,15 +111,16 @@
                   <a href="<?php echo base_url(); ?>/TareasController" title="Limpiar" class="btn btn-sm btn-warning btn-icon rounded-circle mg-r-10 mg-b-10 cursor" onclick="limpiar_table()";>
                     <div><span class="fa fa-eraser" data-icon="ion-add-circle" data-inline="false"></span></div>
                   </a>
-                  <a href="<?php echo base_url(); ?>/TareasController" title="Limpiar" class="btn btn-sm btn-success btn-icon rounded-circle mg-r-10 mg-b-10 cursor" onclick="limpiar_table()";>
-                    <div><span class="fa fa-refresh" data-icon="ion-add-circle" data-inline="false"></span></div>
-                  </a>
+                  <button type="button" class="btn  btn-sm btn-success" id="btnGuardarTarea">
+                      <i class="fa fa-refresh"></i> 
+                  </button>
                 </div>  
             </div>
               
           </form>    
           </div>
             </div>
+            <form action="" id="formTarea">
           <div class="box-body" >
             <table id="example2" class="table table-bordered table-striped" style="width:100%">
                 <thead>
@@ -138,10 +139,11 @@
                 </tr>
                 </thead>
                 <tbody>
+              
                 <?php  if (!empty($get_tareas)):?>
                                         <?php  foreach($get_tareas as $linea):?>
                                                 <tr>
-                                                <td><input class="checkbok2" type="checkbox"  name="check"   ></td>
+                                                <td><input type="hidden" name="codTarea[]" value="<?php echo $linea->nCodTar; ?>"><input class="checkbok2" type="checkbox"     ></td>
                                                 <td class="col-md-3" ><?php echo $linea->cTarea; ?></td>
                                                 <td ><?php echo $linea->Descripcion; ?></td>
                                                 <td style="font-size:89%;" class="col-md-2"><?php echo $linea->cProyecto; ?></td>
@@ -150,8 +152,13 @@
                                                 <td class="col-md-2"><?php echo $linea->dFecFin; ?></td>
                                                 <td><?php echo $linea->cPrioridad; ?></td>
                                                 <td <?php if($linea->nCodEst=='2'){echo "style=background-color:red;color:white"; };?> ><?php echo $linea->cEstado; ?></td>
-                                                <td><input  type="text" size="1" value="<?php echo $linea->nAvance; ?>"  <?php if($linea->nCodEst=='3' or $linea->nCodEst=='1'){echo "disabled";} ?> onkeypress="return Numeros(event);"></td>
-                                                <td><input  type="checkbox"  name="check"  <?php if($linea->bValidada=='1'){echo "checked";} ?> disabled ></td>
+                                                <td><input name="nAvance2[]"  type="hidden" size="1"  value="<?php echo $linea->nAvance; ?>"><input name="nAvance[]" class="form-control input-sm " type="text" size="1" value="<?php echo $linea->nAvance; ?>"  <?php if($linea->nCodEst=='3' or $linea->nCodEst=='1'){echo "readonly";} ?> onkeypress="return Numeros(event);"></td>
+                                                <?php if($linea->bValidada=='1'): ?>
+                                                  <td><span class="label label-success pull-right"><i class="fa  fa-check"></i></span></td>
+                                                <?php else:?>
+                                                  <td><span class="label label-warning pull-right">x</span></td>
+                                                <?php endif ?>
+                                                
                                                 </tr>
                                         <?php endforeach; ?>
                 <?php endif; ?>
@@ -160,6 +167,7 @@
 
                 </tfoot>
             </table>
+            </form>
           </div>
         </div>
       </section>

@@ -258,6 +258,33 @@ $(document).ready(function(){
       
 });
 
+
+$("#btnGuardarTarea").click(function(){
+    $.ajax({
+        type: "POST",
+        data:$("#formTarea").serialize(),
+        url: baseurl+"TareasController/actualizarTarea",
+        success:function(res){
+       if(res=="A"){
+            Swal.fire({
+                title: 'Las tareas se actualizaron',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+            location.reload();
+       }else{
+        Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+       }
+       
+  
+    }
+     })
+} );
 $("#guardar_Revd").click(function(){
     if( $('#checkblanco').prop('checked') ) {
         $(".accion_revision").each(function(){

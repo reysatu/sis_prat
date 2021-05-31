@@ -35,6 +35,20 @@ class TareasController extends BaseController
 		echo view('inicio/footer');
 	}
 	public function actualizarTarea(){
+		$TareasModel=new TareasModel;
+		$idTarea=$this->request->getPostGet("codTarea");
+		$nAvance=$this->request->getPostGet("nAvance");
+		$a="B";
+		for ($i=0; $i < count($idTarea) ; $i++) {
+			$id=$idTarea[$i];
+			$avance=$nAvance[$i];
+			//modificar el usuario
+			$listado=$TareasModel->ActualizarTarea($id,$avance);
+			$listado=$TareasModel->ActualizarAvanceSemaforo($id);
+		
+		}
+		$a="A";
+		echo($a);
 		
 	}
 }
