@@ -1,0 +1,57 @@
+#tableOrden tr {
+  line-height: 10px;
+}
+#table {
+  overflow: auto;
+  max-height: 300px;
+  position: relative;
+}
+div.card {
+  position: relative;
+}
+#tableOrden th {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+#tableaccion tbody tr:hover td {
+  background: #00a65a;
+}
+#tableOrden tbody tr:hover td {
+  background: #00a65a;
+}
+div.dt-buttons {
+  text-align: left !important;
+  margin-left: 15px !important;
+}
+.dataTables_filter {
+  text-align: left !important;
+  margin-left: 15px !important;
+}
+@media print {
+  /* indicamos el salto de pagina */
+  .saltoDePagina {
+    display: block;
+    page-break-before: always;
+  }
+}
+@media print and (color) {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+}
+td {
+  border: 1px solid black;
+}
+.tabla_export {
+  border-collapse: collapse;
+}
+.fondoexport {
+  background-color: #c00000;
+  color: white;
+  font-weight: bold;
+}
+.expor_left {
+  width: 100%;
+  text-align: left;
+}
