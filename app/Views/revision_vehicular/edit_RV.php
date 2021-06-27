@@ -32,7 +32,7 @@
                <div class="col-lg-2 col-xs-12 ">
                   <label for="inputEmail3" class="col-lg-3 control-label">Fecha:</label>
                   <div class="col-lg-8">
-                    <input type="text" class="form-control datepicker2" id="red_feReg" name="red_feReg"  placeholder="" value="<?php echo($datos_select->Fecha) ?>" >
+                    <input type="text" class="form-control datepicker2" id="red_feReg" name="red_feReg"  placeholder="" value="<?php echo($datos_select->Fecha) ?>" disabled>
                   </div>
                </div>
                <div class="col-lg-3 col-xs-12 ">
@@ -123,7 +123,7 @@
               <div class="col-lg-5">
               <label for="inputEmail3" class="col-lg-4 control-label">Fecha de Rev.Sup:</label>
                   <div class="col-lg-4">
-                  <input type="RV_consecutivo" class="form-control datepicker2" id="red_fechaSup" name="red_fechaSup" placeholder="" value="<?php echo($datos_select->FechaJs) ?>" >
+                  <input type="RV_consecutivo" class="form-control datepicker2" id="red_fechaSup" name="red_fechaSup" placeholder="" value="<?php echo($datos_select->FechaSs) ?>" >
                   </div>
               </div>
               

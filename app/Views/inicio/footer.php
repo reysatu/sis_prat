@@ -38,7 +38,9 @@
 <script src="<?php echo base_url();?>/public/myjs/funcionesVehicularesListado.js"></script>
 <script src="<?php echo base_url();?>/public/myjs/funcionesVehicular.js"></script>
 <script src="<?php echo base_url();?>/public/myjs/funcionesCambioVehicular.js"></script>
+<script src="<?php echo base_url();?>/public/myjs/funcionesCuadroMando.js"></script>
 
+ 
  <script src="<?php echo base_url();?>/public/plugin/notify.js"></script>
 <!-- page script -->
 

@@ -21,7 +21,7 @@ class RevisionVehicularModel extends Model{
     protected $skipValidation     = false; 
     function get_datosselect($id){
         $db=db_connect();
-        $mostrar=$db->query("select Convert(DATE, dFecReg) as Fecha,Convert(DATE, dFecVBJefe) as FechaJs,rv.cObservaciones as observaciones, rv.iEstado as Estado, rv.cPlacaVeh as Placa ,rv.cCodConsecutivo as Codigo,rv.cCodEmp as codChofer,am.cCodAccion as codAccion,tr.nCodTipRev as CodTipRev,rv.cCodJefe as CodJefe,rv.cCodSup as CodSup,
+        $mostrar=$db->query("select Convert(DATE, dFecReg) as Fecha,Convert(DATE, dFecVBJefe) as FechaJs, Convert(DATE, dFecVBJSup) as FechaSs,rv.cObservaciones as observaciones, rv.iEstado as Estado, rv.cPlacaVeh as Placa ,rv.cCodConsecutivo as Codigo,rv.cCodEmp as codChofer,am.cCodAccion as codAccion,tr.nCodTipRev as CodTipRev,rv.cCodJefe as CodJefe,rv.cCodSup as CodSup,
         rv.nConsecutivo as Nro,tr.cTipoRevision as TipoRevision,
         am.cAccion as Revision,ch.Descripcion as Chofer, 
         cs.Descripcion as Supervisor, 
@@ -44,7 +44,7 @@ class RevisionVehicularModel extends Model{
         $db=db_connect();
         $mostrar=$db->query(
         "update GF_RevisionVehicular set cCodEmp='$cCodEmp',
-        cCodSup='$cCodSup',cCodJefe='$cCodJefe',dFecVBJSup='$dFecVBJSup',cObservaciones= NULLIF ( '$cObservaciones' , '' ),dFecReg='$dFecReg' where nConsecutivo='$RV_consecutivo';
+        cCodSup='$cCodSup',cCodJefe='$cCodJefe',dFecVBJSup='$dFecVBJSup',dFecVBJefe='$dFecVBJefe',cObservaciones= NULLIF ( '$cObservaciones' , '' ) where nConsecutivo='$RV_consecutivo';
       ");
         return $mostrar->getResult();
     }

@@ -9,6 +9,20 @@ function printPDF(){
   window.open(BASE, '_blank');
 }
 $(document).ready(function(){
+  var table = $('#example222').DataTable( {
+  
+    scrollX: true,
+     
+        paging      : false,
+        lengthChange: false,
+        searching   : true,
+        ordering    : false,
+        info    : false,
+        
+        
+       
+    
+} );
   cargar_table_default();
   $("#select_Chofer").change(function(){
     selectconsecutivo=$("#select_Chofer").val();
@@ -129,6 +143,7 @@ $(document).ready(function(){
     }
    
   }
+  
   // function accion3(valfilaU){
   //   valfilaU=valfilaU;
   //     $("#indent_orden").val(valfilaU);
@@ -198,6 +213,79 @@ $(document).ready(function(){
               "sSortDescending": ": Activar para ordenar la columna de manera descendente"
           }
       } 
-      }); 
+      });
+     
+      var table_rv=$('#table_default2').DataTable({
+        "scrollX": true,
+     
+        'paging'      : false,
+        'lengthChange': false,
+        'searching'   : true,
+        'ordering'    : false,
+        'info'        : false,
+        'autoWidth'   : true,
+        
+        "scrollCollapse": true,
+          "language":{
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrando &nbsp _MENU_ &nbsp registros por página",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar&nbsp",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        } 
+        });
+        var table_rv=$('#table_default3').DataTable({
+         
+     
+          'paging'      : false,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : false,
+          'info'        : false,
+          'autoWidth'   : true,
+          
+          "scrollCollapse": true,
+            "language":{
+              "sProcessing":     "Procesando...",
+              "sLengthMenu":     "Mostrando &nbsp _MENU_ &nbsp registros por página",
+              "sZeroRecords":    "No se encontraron resultados",
+              "sEmptyTable":     "Ningún dato disponible en esta tabla",
+              "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+              "sInfoPostFix":    "",
+              "sSearch":         "Buscar&nbsp",
+              "sUrl":            "",
+              "sInfoThousands":  ",",
+              "sLoadingRecords": "Cargando...",
+              "oPaginate": {
+                  "sFirst":    "Primero",
+                  "sLast":     "Último",
+                  "sNext":     "Siguiente",
+                  "sPrevious": "Anterior"
+              },
+              "oAria": {
+                  "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+              }
+          } 
+          });    
   }
-  
+ 

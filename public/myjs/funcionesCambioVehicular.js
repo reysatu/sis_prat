@@ -60,7 +60,7 @@ $(document).ready(function(){
                 { position:"top" }
               );
               return false;  
-        }
+        } 
         $.ajax({ 
             type:'POST',
             url: baseurl+"RevisionVController/guardarRevisionVehicular",
@@ -101,6 +101,7 @@ $(document).ready(function(){
                         $('#red_placa').prop('disabled', 'disabled');
                         $('#red_nRev').prop('disabled', 'disabled');
                         $('#red_tipoRevision').prop('disabled', 'disabled');
+                        $('#red_feReg').prop('disabled', 'disabled');
                         placa=$("#red_placa").val();     
                         tipoRevision=$("#red_tipoRevision").val(); 
                         $.ajax({ 
@@ -215,6 +216,7 @@ $(document).ready(function(){
             url: baseurl+"RevisionVController/guardarRevisionVehicular",
             data:$("#form_RevisionVehicularEditar").serialize(),
              success: function(data){
+                 console.log(data);
                 Swal.fire({
                     title: 'Se generó',
                     icon: 'success',

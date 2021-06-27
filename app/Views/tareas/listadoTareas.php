@@ -1,5 +1,5 @@
   <!-- Full Width Column -->
- 
+  <link rel="stylesheet" href="<?php echo base_url();?>/public/mycss/tarea.css">
   <div class="content-wrapper">
     <div class="container-fluid" >
       <!-- Content Header (Page header) -->
@@ -17,7 +17,7 @@
             <div class="col-md-2 col-xs-6">
               <div class="form-group">
                     <label for="">&nbsp</label>
-                  <input type="text" class="form-control input-sm"  name="textbus" placeholder="Buscar" value="<?php echo !empty($textbus) ? $textbus:'';?>"  >
+                  <input type="text" class="form-control input-sm"  id="textbus" name="textbus" placeholder="Buscar" value="<?php echo !empty($textbus) ? $textbus:'';?>"  >
               </div>  
             </div>
             <div class="col-md-2 col-xs-6">
@@ -28,7 +28,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control input-sm  datepicker1" id="datepicker1" name="FechaInicio" placeholder="Fecha inicio" value="<?php echo !empty($fechaI) ? $fechaI:'';?>">
+                  <input type="text" class="form-control input-sm  datepicker1" id="FechaInicio" name="FechaInicio" placeholder="Fecha inicio" value="<?php echo !empty($fechaI) ? $fechaI:'';?>">
                 </div>
               </div>  
             </div>
@@ -39,14 +39,14 @@
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control input-sm  datepicker2" id="datepicker2" name="FechaFin" placeholder="Fecha fin" value="<?php echo !empty($fechaF) ? $fechaF:'';?>" >
+                  <input type="text" class="form-control input-sm  datepicker2" id="FechaFin" name="FechaFin" placeholder="Fecha fin" value="<?php echo !empty($fechaF) ? $fechaF:'';?>" >
                 </div>
               </div>  
             </div>
             <div class="col-md-2 col-xs-6">
               <div class="form-group">
               <label for="">Tipo Tarea:</label>
-              <select class="form-control input-sm" name="tipoTarea"> 
+              <select class="form-control input-sm" id="tipoTarea" name="tipoTarea"> 
                     <option value=''>TODOS</option>
                     <?php  foreach($get_tipoTarea as $linea):?>
                       <?php if(!empty($tipoTarea)):?>
@@ -62,7 +62,7 @@
             </div>
             <div class="col-md-2 col-xs-6">
               <label for="">Estado:</label>
-                <select class="form-control input-sm" name="estado">
+                <select class="form-control input-sm" id="estado" name="estado">
                     <option value=''>TODOS</option>
                     <?php  foreach($get_estadoTarea as $linea):?>
                       <?php if(!empty($estado)):?>
@@ -79,7 +79,7 @@
           <div class="row">
             <div class="col-md-2 col-xs-6">
               <label for="">Prioridad:</label>
-                <select class="form-control input-sm" name="prioridad">
+                <select class="form-control input-sm" id="prioridad" name="prioridad">
                     <option value=''>TODOS</option>
                     <?php  foreach($get_prioridadTarea as $linea):?>
                       <?php if(!empty($estado)):?>
@@ -94,7 +94,7 @@
             </div>
             <div class="col-md-2 col-xs-6">
               <label for="">validada:</label>
-                <select class="form-control input-sm " name="validada">
+                <select class="form-control input-sm " id="validada" name="validada">
                     <option value=''>TODOS</option>
                     <option <?php if($validada=='1'){echo "selected";}?> value='1'>SI</option>
                     <option <?php if($validada=='NULL'){echo "selected";}?> value='NULL'>NO</option>
@@ -104,7 +104,7 @@
             <div class="col-md-2 col-xs-12">
            <label for="">&nbsp</label>
                 <div class="form-group">
-                  <button type="submit" class="btn  btn-sm btn-primary">
+                  <button type="button" class="btn  btn-sm btn-primary" onclick="cargar_tableTarea();">
                       <i class="fa fa-search"></i> 
                   </button>
                   <input type="hidden" name="buscar" value="Buscar" class="btn  btn-sm btn-primary">
@@ -122,47 +122,23 @@
             </div>
             <form action="" id="formTarea">
           <div class="box-body" >
-            <table id="example2" class="table table-bordered table-striped" style="width:100%">
+            <table id="tableTareaL" class="table table-bordered table-striped" style="width:100%">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>TAREA</th>
-                  <th>AREA</th>
-                  <th>TIPO TAREA</th>
-                  <th>RESPONSABLE</th>
-                  <th>INICIO</th>
-                  <th>FIN</th>
-                  <th>PRIORIDAD</th>
-                  <th>ESTADO</th>
+                  <th>Tarea</th>
+                  <th>Area</th>
+                  <th>Tipo</th>
+                  <th>Responsable</th>
+                  <th>Inicio</th>
+                  <th>Fin</th>
+                  <th>Prioridad</th>
+                  <th>Estado</th>
                   <th>Av</th> 
                   <th>V</th>
                 </tr>
                 </thead>
-                <tbody>
-              
-                <?php  if (!empty($get_tareas)):?>
-                                        <?php  foreach($get_tareas as $linea):?>
-                                                <tr>
-                                                <td><input type="hidden" name="codTarea[]" value="<?php echo $linea->nCodTar; ?>"><input class="checkbok2" type="checkbox"     ></td>
-                                                <td class="col-md-3" ><?php echo $linea->cTarea; ?></td>
-                                                <td ><?php echo $linea->Descripcion; ?></td>
-                                                <td style="font-size:89%;" class="col-md-2"><?php echo $linea->cProyecto; ?></td>
-                                                <td style="font-size:89%;" class="col-md-3"><?php echo $linea->cApePat." " ?><?php echo  $linea->cApeMat." " ?><?php echo  $linea->cNombres ?></td>
-                                                <td class="col-md-2" ><?php echo $linea->dFecIni; ?></td>
-                                                <td class="col-md-2"><?php echo $linea->dFecFin; ?></td>
-                                                <td><?php echo $linea->cPrioridad; ?></td>
-                                                <td <?php if($linea->nCodEst=='2'){echo "style=background-color:red;color:white"; };?> ><?php echo $linea->cEstado; ?></td>
-                                                <td><input name="nAvance2[]"  type="hidden" size="1"  value="<?php echo $linea->nAvance; ?>"><input name="nAvance[]" class="form-control input-sm " type="text" size="1" value="<?php echo $linea->nAvance; ?>"  <?php if($linea->nCodEst=='3' or $linea->nCodEst=='1'){echo "readonly";} ?> onkeypress="return Numeros(event);"></td>
-                                                <?php if($linea->bValidada=='1'): ?>
-                                                  <td><span class="label label-success pull-right"><i class="fa  fa-check"></i></span></td>
-                                                <?php else:?>
-                                                  <td><span class="label label-warning pull-right">x</span></td>
-                                                <?php endif ?>
-                                                
-                                                </tr>
-                                        <?php endforeach; ?>
-                <?php endif; ?>
-                </tbody>
+               
                 <tfoot>
 
                 </tfoot>

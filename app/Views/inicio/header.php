@@ -54,6 +54,7 @@
           <ul class="nav navbar-nav">
           <li ><a href="<?php echo base_url();?>/RevisionVController">Revisión Vehicular</a></li>
           <li><a href="<?php echo base_url();?>/TareasController">Tareas</a></li>
+          <li><a href="<?php echo base_url();?>/CuadroMandoController">Cuadro de Mando</a></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->

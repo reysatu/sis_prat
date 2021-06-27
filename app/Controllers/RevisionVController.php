@@ -171,8 +171,9 @@ class RevisionVController extends BaseController
 		$cCodJefe=$this->request->getPostGet("red_jefe");
 		$dFecVBJefe=$this->request->getPostGet("red_fechaJef");
 		$dFecVBJefe=date("Y-d-m", strtotime($dFecVBJefe));
+		$dFecVBJSup=$this->request->getPostGet("red_fechaSup");
+		$dFecVBJSup=date("Y-d-m", strtotime($dFecVBJSup));
 		$cCodSup=$this->request->getPostGet("red_supervisor");
-		$dFecVBJSup=$dFecVBJefe;
 		$cObservaciones=$this->request->getPostGet("red_observacion");
 		if($cObservaciones==""){
 			$cObservaciones=null;
@@ -187,7 +188,7 @@ class RevisionVController extends BaseController
 		$RV_consecutivo=$this->request->getPostGet("RV_consecutivo");
 		
 		$valida="F"; 
-		$dFecReg2=date("Y-d-m", strtotime($dFecReg));
+		$dFecReg2=date("Y-m-d", strtotime($dFecReg));
 		if($RV_consecutivo==''){
 			if($cCodAccionM=="1RO"){
 			
@@ -315,7 +316,71 @@ class RevisionVController extends BaseController
 
 }
 
+public function get_revision(){
+	$RevisionVehicularModel=new RevisionVehicularModel;
+	$valor_buscado=$this->request->getGetPost('search')['value'];
+	$fechaIniRevi=$this->request->getPostGet("fechaIniRevi");
+	$fechaFinRevi=$this->request->getPostGet("fechaFinRevi");
+	$re_placa=$this->request->getPostGet("re_placa");
 
+	if($re_placa !=""){
+		$re_placa=" AND rv.cPlacaVeh='$re_placa'";
+	}
+	$table_map=[
+		0 =>'rv.dFecReg',
+		1 =>'rv.dFecReg',
+		2 =>'rv.cPlacaVeh',
+		3 =>'rv.cCodConsecutivo',
+		4 =>'rv.nConsecutivo',
+		5 =>'tr.cTipoRevision',
+		6 =>'am.cAccion',
+		7 =>'ch.Descripcion',
+		8 =>'cs.Descripcion',
+		9 =>'cj.Descripcion',
+		10 =>'rv.iEstado',
+	];
+	$table_map2=[
+		0 =>'rv.dFecReg',
+		1 =>'rv.cPlacaVeh',
+		2 =>'rv.cCodConsecutivo',
+		3 =>'rv.nConsecutivo',
+		4 =>'tr.cTipoRevision',
+		5 =>'am.cAccion',
+		6 =>'ch.Descripcion',
+		7 =>'cs.Descripcion',
+		8 =>'cj.Descripcion',
+		9 =>'rv.iEstado',
+	];
+	
+	$sql_count="select  count(nConsecutivo) as total  from GF_RevisionVehicular as rv inner join GF_TipoRevision as tr on rv.nCodTipRev=tr.nCodTipRev inner join GF_AccionMantenimiento as am on rv.cCodAccionM=am.cCodAccion inner join  VW_GFChoferesBuscar as ch on rv.cCodEmp=ch.Codigo inner join VW_GFEMPLEADOS as cj on rv.cCodJefe=cj.Codigo inner join VW_GFEMPLEADOS as cs on rv.cCodSup=cs.Codigo WHERE Convert(DATE, dFecReg) between ' $fechaIniRevi ' and ' $fechaFinRevi ' $re_placa ";
+	$sql_data="select Convert(DATE, dFecReg) as Fecha, rv.cPlacaVeh as Placa ,rv.iEstado as Estado ,rv.cCodConsecutivo as Codigo,rv.nConsecutivo as Nro,tr.cTipoRevision as TipoRevision,am.cAccion as Revision,ch.Descripcion as Chofer, cs.Descripcion as Supervisor, cj.Descripcion as Jefe  from GF_RevisionVehicular as rv inner join GF_TipoRevision as tr on rv.nCodTipRev=tr.nCodTipRev inner join GF_AccionMantenimiento as am on rv.cCodAccionM=am.cCodAccion inner join  VW_GFChoferesBuscar as ch on rv.cCodEmp=ch.Codigo inner join VW_GFEMPLEADOS as cj on rv.cCodJefe=cj.Codigo inner join VW_GFEMPLEADOS as cs on rv.cCodSup=cs.Codigo WHERE Convert(DATE, dFecReg) between ' $fechaIniRevi ' and ' $fechaFinRevi ' $re_placa ";
+	$condition="";
+	if(!empty($valor_buscado)){
+		foreach($table_map2 as $key =>$val){
+			if($table_map2[$key] == 'rv.dFecReg'){
+				$condition .= " WHERE ". $val ." LIKE '%".$valor_buscado."%'";
+			}else{
+				$condition .= " OR " . $val ." LIKE '%".$valor_buscado."%'";
+			}
+		}
+	}else{
+		print_r($valor_buscado);
+	}
+	$sql_count=$sql_count.$condition;
+	$sql_data=$sql_data.$condition;
+	
+	$total_count=$this->db->query($sql_count)->getRow();
+	
+	$sql_data .=" order by ".$table_map[$this->request->getGetPost('order')[0]['column']]." ".$this->request->getGetPost('order')[0]['dir']." OFFSET ".$this->request->getGetPost('start') ." ROWS FETCH NEXT ".$this->request->getGetPost('length')." ROWS ONLY";
+	$data=$this->db->query($sql_data)->getResult();
+	$json_data=[
+		'draw'=>intval($this->request->getGetPost('draw')),
+		'recordsTotal'=>$total_count->total,
+		'recordsFiltered'=>$total_count->total,
+		'data'=>$data
+	];
+	echo json_encode($json_data);
+}
 }
 
 

@@ -183,27 +183,76 @@ class ReporteRevisionVehicular extends BaseController
                     $hoja->setCellValue("K$fila","Acción Correctiva");
                     $hoja->getStyle("B$fila:R$fila")->getFont()->setSize(10);
                     $hoja->getRowDimension($fila)->setRowHeight(14);
+                    $fila=$fila+1;
+                    $hoja->setCellValue("B".$fila,$row->cRevision);
+                    $hoja->setCellValue("G".$fila,$row->cCodAccionR);
+                    $hoja->setCellValue("K".$fila,$row->cAccionCorr);
+                    $hoja->mergeCells("B$fila:F$fila");
+                    $hoja->mergeCells("K$fila:R$fila");
+                    $hoja->mergeCells("G$fila:J$fila");
+                    $hoja->getStyle("K".$fila)->getAlignment()->setWrapText(true);
+                    $hoja->getStyle("G$fila")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+                    $hoja->getStyle("B$fila:R$fila")->applyFromArray($styleArray);
+                    $hoja->getStyle('B'.$fila)->getFont()->setSize(10);
+                    $hoja->getStyle('G'.$fila)->getFont()->setSize(8);
+                    $hoja->getStyle('K'.$fila)->getFont()->setSize(7);
+                    $hoja->getStyle("B$fila:R$fila")->getFont()->setSize(10);
+                    $hoja->getRowDimension($fila)->setRowHeight(14);
                     $a1=$a1+1;
                     $num=$num+1;
                }else{
-                $hoja->setCellValue("B".$fila,$row->cRevision);
-                $hoja->setCellValue("G".$fila,$row->cCodAccionR);
-                $hoja->setCellValue("K".$fila,$row->cAccionCorr);
-                $hoja->mergeCells("B$fila:F$fila");
-                $hoja->mergeCells("K$fila:R$fila");
-                $hoja->mergeCells("G$fila:J$fila");
-                $hoja->getStyle("K".$fila)->getAlignment()->setWrapText(true);
-                $hoja->getStyle("G$fila")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-                $hoja->getStyle("B$fila:R$fila")->applyFromArray($styleArray);
-                $hoja->getStyle('B'.$fila)->getFont()->setSize(10);
-                $hoja->getStyle('G'.$fila)->getFont()->setSize(8);
-                $hoja->getStyle('K'.$fila)->getFont()->setSize(7);
-                $hoja->getStyle("B$fila:R$fila")->getFont()->setSize(10);
-                $hoja->getRowDimension($fila)->setRowHeight(14);
-                $a1=$a1+1;
                 if($valorgrup!=$grupo){
-                    $a1=0;
+                    $valorgrup=$grupo;
+                    $numi= $numR[$num-1];
+                    $hoja->mergeCells("B$fila:F$fila");
+                    $hoja->mergeCells("G$fila:J$fila");
+                    $hoja->mergeCells("K$fila:R$fila");
+                    $hoja->getStyle("B$fila:R$fila")->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_WHITE);
+                    $hoja->getStyle("B$fila:R$fila")->getFont()->setBold(true);
+                    $hoja->getStyle("B$fila:R$fila")->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('c00000'); 
+                    $hoja->getStyle("D$fila:R$fila")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+                    $hoja->setCellValue("B$fila","$numi. $row->cGrupo");
+                    $hoja->setCellValue("G$fila","Acción");
+                    $hoja->setCellValue("K$fila","Acción Correctiva");
+                    $hoja->getStyle("B$fila:R$fila")->getFont()->setSize(10);
+                    $hoja->getRowDimension($fila)->setRowHeight(14);
+                    
+                    $fila=$fila+1;
+                    $hoja->setCellValue("B".$fila,$row->cRevision);
+                    $hoja->setCellValue("G".$fila,$row->cCodAccionR);
+                    $hoja->setCellValue("K".$fila,$row->cAccionCorr);
+                    $hoja->mergeCells("B$fila:F$fila");
+                    $hoja->mergeCells("K$fila:R$fila");
+                    $hoja->mergeCells("G$fila:J$fila");
+                    $hoja->getStyle("K".$fila)->getAlignment()->setWrapText(true);
+                    $hoja->getStyle("G$fila")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+                    $hoja->getStyle("B$fila:R$fila")->applyFromArray($styleArray);
+                    $hoja->getStyle('B'.$fila)->getFont()->setSize(10);
+                    $hoja->getStyle('G'.$fila)->getFont()->setSize(8);
+                    $hoja->getStyle('K'.$fila)->getFont()->setSize(7);
+                    $hoja->getStyle("B$fila:R$fila")->getFont()->setSize(10);
+                    $hoja->getRowDimension($fila)->setRowHeight(14);
+                    $a1=$a1+1;
+                    $num=$num+1;
+                }else{
+                    $hoja->setCellValue("B".$fila,$row->cRevision);
+                    $hoja->setCellValue("G".$fila,$row->cCodAccionR);
+                    $hoja->setCellValue("K".$fila,$row->cAccionCorr);
+                    $hoja->mergeCells("B$fila:F$fila");
+                    $hoja->mergeCells("K$fila:R$fila");
+                    $hoja->mergeCells("G$fila:J$fila");
+                    $hoja->getStyle("K".$fila)->getAlignment()->setWrapText(true);
+                    $hoja->getStyle("G$fila")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+                    $hoja->getStyle("B$fila:R$fila")->applyFromArray($styleArray);
+                    $hoja->getStyle('B'.$fila)->getFont()->setSize(10);
+                    $hoja->getStyle('G'.$fila)->getFont()->setSize(8);
+                    $hoja->getStyle('K'.$fila)->getFont()->setSize(7);
+                    $hoja->getStyle("B$fila:R$fila")->getFont()->setSize(10);
+                    $hoja->getRowDimension($fila)->setRowHeight(14);
+                    $a1=$a1+1;
                 }
+               
+             
                }
         }
         $fila=$fila+1;

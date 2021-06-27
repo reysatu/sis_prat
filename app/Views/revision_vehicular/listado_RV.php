@@ -21,14 +21,14 @@
                 </a>
               </div>  
             </div>
-            <form action="<?php echo current_url();?>" method="POST" >
+            <form  method="POST" >
             <div class="col-md-2 col-xs-6">
               <div class="form-group">
                 <div class="input-group date">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right datepicker1" id="datepicker1" name="FechaInicio" placeholder="Fecha inicio" value="<?php echo !empty($fechaI) ? $fechaI:'';?>">
+                  <input type="text" class="form-control pull-right datepicker1" id="fechaIniRevi" name="FechaInicio" placeholder="Fecha inicio" value="<?php echo !empty($fechaI) ? $fechaI:'';?>">
                 </div>
               </div>  
             </div>
@@ -38,7 +38,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right datepicker2" id="datepicker2" name="FechaFin" placeholder="Fecha fin" value="<?php echo !empty($fechaF) ? $fechaF:'';?>" required>
+                  <input type="text" class="form-control pull-right datepicker2" id="fechaFinRevi" name="FechaFin" placeholder="Fecha fin" value="<?php echo !empty($fechaF) ? $fechaF:'';?>" required>
                 </div>
               </div>  
             </div>
@@ -61,7 +61,7 @@
              
               <div class="col-md-2 col-xs-12">
               <div class="form-group">
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick="cargar_table()">
                   <i class="fa fa-search"></i> 
                 </button>
                 <a href="<?php echo base_url(); ?>/RevisionVController" title="Limpiar" class="btn btn-warning btn-icon rounded-circle mg-r-10 mg-b-10 cursor" onclick="limpiar_table()";>
@@ -73,7 +73,7 @@
               </form>   
           </div>
           <div class="box-body" >
-            <table id="example2" class="table table-bordered table-striped" style="width:100%">
+            <table id="example32" class="table table-bordered table-striped" style="width:100%">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -89,31 +89,8 @@
                   <th>Estado</th>
                 </tr>
                 </thead>
-                <tbody>
-                <?php  if (!empty($RevisionVehicularArray)):?>
-                                        <?php  foreach($RevisionVehicularArray as $linea):?>
-                                                <tr>
-
-                                                <td class=""><input class="checkbok2" type="checkbox"  name="check" value="<?php echo $linea->Nro; ?>" id="delcheck_<?php echo $linea->Nro; ?>"  ></td>
-                                                <td ><?php echo $linea->Fecha; ?></td>
-                                                <td ><?php echo $linea->Placa; ?></td>
-                                                
-                                                <td   ><?php echo $linea->Codigo; ?></td>
-                                                <td  class="" ><?php echo $linea->Nro; ?></td>
-                                                <td class="" ><?php echo $linea->TipoRevision; ?></td>
-                                                <td  ><?php echo $linea->Revision; ?></td>
-                                                <td   ><?php echo $linea->Chofer; ?></td>
-                                                <td   ><?php echo $linea->Supervisor; ?></td>
-                                                <td   ><?php echo $linea->Jefe; ?></td>
-                                                <?php if($linea->Estado=='1'):?>
-                                                  <td   >Abierto</td>
-                                                 <?php else: ?>
-                                                  <td   >Cerrado</td>
-                                                 <?php endif?> 
-                                                </tr>
-                                            <?php endforeach; ?>
-                                    <?php endif; ?>
-                </tbody>
+               
+                
                 <tfoot>
 
                 </tfoot>

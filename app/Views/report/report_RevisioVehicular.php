@@ -34,7 +34,7 @@
         <td style="font-size:10px;">FECHA</td>
         <td style="font-size:10px;"><?php echo $getEmpresa->FechaVersion ?></td>
     </tr>
-       <tr height="10"></tr>
+       <tr height="3"></tr>
     <tr >
         <td class="fondoexport" style="font-size:10px;"><div class="expor_left">RAZON SOCIAL:</div></td>
         <td align="center"  colspan="4" style="font-size:12px;"><?php echo $getEmpresa->RazonSocial ?> </td>
@@ -53,7 +53,7 @@
         <td class="fondoexport"   style="font-size:10px;">DIRECCIÓN:</td>
         <td align="center"  colspan="4" style="font-size:10px;"><?php echo $getEmpresa->Direccion?></td>
     </tr>
-    <th colspan="7" height="30" style="font-size:13px;" >FECHA: <?php echo $datosrv->Fecha ?>   REVISIÓN: <?php echo $datosrv->codAccion ?>   </th>
+    <th colspan="7" height="20" style="font-size:11px;" >FECHA: <?php echo $datosrv->Fecha ?>   REVISIÓN: <?php echo $datosrv->codAccion ?>   </th>
     <tr align="">
         <td   class="fondoexport" style="font-size:10px;">I. PLACA DEL VEHÍCULO</td>
         <td  align="center" colspan="2" style="font-size:10px;"> <b><?php echo $datosrv->Placa ?></b> </td>
@@ -66,7 +66,7 @@
         <td class="fondoexport" colspan="2" style="font-size:10px;">IV.TRANSPORTISTA</td>
         <td align="center" colspan="2" style="font-size:10px;"><b><?php echo $datosrv->Chofer ?></b></td>
     </tr>
-    <tr height="10"></tr>
+    <tr height="5"></tr>
     <?php foreach($datosDet as $row):?>
     <?php  $grupo=$row->cGrupo; ?>
     <?php if($a1==0): ?>
@@ -76,8 +76,6 @@
         <td class="fondoexport"  align="center"   style="font-size:12px;">Acción</td>
         <td align="center" class="fondoexport" colspan="3" style="font-size:13px;">Acción Correctiva</td>
     </tr>
-    <?php  $a1=$a1+1;$num=$num+1;?>
-    <?php else:?>
     <tr align="">
         <td colspan="3"  style="font-size:10px;"><?php echo $row->cRevision ?></td>
         <td align="center"   style="font-size:10px;"><?php echo $row->cCodAccionR ?></td>
@@ -87,17 +85,45 @@
         </div>
         </td>
     </tr>
+    <?php  $a1=$a1+1;$num=$num+1;?>
+    <?php else:?>
         <?php if($valorgrup!=$grupo):?>
-            <?php  $a1=0;?>
-        <?php endif ?>
+            <?php  $valorgrup=$grupo;$numi= $numR[$num-1]; ?>
+            <tr align="">
+        <td class="fondoexport" colspan="3"  style="font-size:10px;"><?php echo($numi .". ". $row->cGrupo) ?></td>
+        <td class="fondoexport"  align="center"   style="font-size:12px;">Acción</td>
+        <td align="center" class="fondoexport" colspan="3" style="font-size:13px;">Acción Correctiva</td>
+    </tr>
+    <tr align="">
+        <td colspan="3"  style="font-size:10px;"><?php echo $row->cRevision ?></td>
+        <td align="center"   style="font-size:10px;"><?php echo $row->cCodAccionR ?></td>
+        <td colspan="3" style="font-size:10px;">
+        <div style="width: 100%;text-align: justify;">
+            <?php echo $row->cAccionCorr ?>
+        </div>
+        </td>
+    </tr>
+    <?php  $a1=$a1+1;$num=$num+1;?>
+        <?php else:?>
+            <tr align="">
+                <td colspan="3"  style="font-size:10px;"><?php echo $row->cRevision ?></td>
+                <td align="center"   style="font-size:10px;"><?php echo $row->cCodAccionR ?></td>
+                <td colspan="3" style="font-size:10px;">
+                <div style="width: 100%;text-align: justify;">
+                    <?php echo $row->cAccionCorr ?>
+                </div>
+                </td>
+            </tr>
+            <?php  $a1=$a1+1;?>
+    <?php endif ?>
     <?php endif ?>
     <?php endforeach ?>
     <tr height="10"></tr>
-     <tr> <th colspan="7"  style="font-size:10px;">Leyenda : OK : Cumple  -  NO : No Cumple  -  F : Presencia de una falla - R : Reparado o Repuesto el accesorio</td></th>
+     <tr> <th colspan="7"  style="font-size:9px;">Leyenda : OK : Cumple  -  NO : No Cumple  -  F : Presencia de una falla - R : Reparado o Repuesto el accesorio</td></th>
    
 </table>
-<p  style="font-size:10px;"> (*) El llenado de este formato es obligación de cada usuario antes del inicio de sus actividades																</p>
-<p  style="font-size:10px;">(*) Las observaciones  en la verificación del vehículo y al estar en ruta serán llenados en el reverso de éste registro</p>
+<p  style="font-size:9px;"> (*) El llenado de este formato es obligación de cada usuario antes del inicio de sus actividades																</p>
+<p  style="font-size:9px;">(*) Las observaciones  en la verificación del vehículo y al estar en ruta serán llenados en el reverso de éste registro</p>
 <div class="saltoDePagina"></div>
 <table class="tabla_export">
     <tr align="center"  >
